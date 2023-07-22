@@ -4,10 +4,13 @@ function getComputerChoice()
     let choiceString = ["rock", "paper", "scissor"];
     return choiceString[index].toLowerCase();
 }
-function playRound()
+
+
+function playRound(playerSelection)
 {
     let outcome;
-    let playerSelection = prompt("Type Rock, Paper or Scissors:").toLowerCase();
+
+
     let computerSelection = getComputerChoice();
     console.log("Computer chose " + computerSelection)
     if(playerSelection === "rock" && computerSelection === "scissor" )
@@ -31,19 +34,16 @@ function playRound()
         outcome = "lose";
         return outcome;
     }
+
 }
 
-function playGame()
-{
-    let rounds = 5;
     let playerScore = 0;
     let computerScore = 0;
     let draws = 0;
     let message;
-
-    while(rounds > 0)
-    {      
-        let outcome = playRound(); 
+    let outcome = getPlayerSelection();
+    if(playerScore < 5 || computerScore < 5)
+    { 
         if(outcome === "win")
         {
             console.log("You win this round");
@@ -55,26 +55,51 @@ function playGame()
         }else{
             console.log("You draw this round");
             draws++;
-        }
-        rounds--;
-        console.log("Round: " + rounds);
+        }  
+        console.log(playerScore);
     }
+
     if(playerScore > computerScore)
     {
         message = "You win!";
     }else if(playerScore < computerScore)
     {
         message = "You lose";
-    }else{
-        message = "Draw";
     }
 
-    return message;
-}
 
-console.log(playGame());
+container = document.querySelector('.container');
+const displayResult = document.createElement('div');
+
+const btnOne = document.createElement('button');
+btnOne.textContent = "rock";
+container.appendChild(btnOne);
+
+const btnTwo = document.createElement('button');
+btnTwo.textContent = "paper";
+container.appendChild(btnTwo);
+
+const btnThree = document.createElement('button');
+btnThree.textContent = "Scissor";
+container.appendChild(btnThree);
+
+let playerSelection;
+btnOne.addEventListener('click', () => {
+    playerSelection = "rock";
+    displayResult.textContent = playRound(playerSelection);
+});
 
 
-/*const playerSelection =  "paper"
-const computerSelection = getComputerChoice();
-*/
+btnTwo.addEventListener('click', () => {
+    playerSelection = "paper";
+    displayResult.textContent = playRound(playerSelection);
+    console.log(playerSelection);
+});
+
+
+btnThree.addEventListener('click',() => {
+    playerSelection = "scissor";
+    displayResult.textContent = playRound(playerSelection);
+});
+
+container.appendChild(displayResult);
