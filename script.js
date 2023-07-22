@@ -44,7 +44,6 @@ function playRound(playerSelection)
         }
   
     }
-
     if(playerScore === 5)
     {
         displayResult.textContent = "You win the game";
@@ -52,28 +51,19 @@ function playRound(playerSelection)
     {
         displayResult.textContent = "You lose";
     }else{
-        displayResult.textContent = outcome + "Your score: " + playerScore + " | Computer Score: " + computerScore + " | Draws: " + draws;
-
+        displayResult.textContent = "Your score: " + playerScore + " | Computer Score: " + computerScore + " | Draws: " + draws;
     }
-
-
     console.log(outcome + " " + playerScore);
 }
 
 container = document.querySelector('.container');
-const displayResult = document.createElement('div');
+const displayResult = document.querySelector('.display');
 
-const btnOne = document.createElement('button');
-btnOne.textContent = "rock";
-container.appendChild(btnOne);
 
-const btnTwo = document.createElement('button');
-btnTwo.textContent = "paper";
-container.appendChild(btnTwo);
+const btnOne = document.querySelector(".rock");
+const btnTwo = document.querySelector(".paper");
+const btnThree = document.querySelector(".scissor");
 
-const btnThree = document.createElement('button');
-btnThree.textContent = "Scissor";
-container.appendChild(btnThree);
 
 let playerSelection;
 btnOne.addEventListener('click', () => {
@@ -81,17 +71,13 @@ btnOne.addEventListener('click', () => {
     playRound(playerSelection);
 });
 
-
 btnTwo.addEventListener('click', () => {
     playerSelection = "paper";
     playRound(playerSelection);
     
 });
 
-
 btnThree.addEventListener('click',() => {
     playerSelection = "scissor";
     playRound(playerSelection);
 });
-
-container.appendChild(displayResult);
